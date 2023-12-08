@@ -1,4 +1,3 @@
-/*jshint esversion: 6 */
 const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
@@ -20,12 +19,12 @@ app.use((err, req, res, next) => {
     res.status(500).send("Something broke!");
 });
 
-mongoose.connect('mongodb+srv://sangsite:SSkenshin13@sangsite.v6gs5rj.mongodb.net/?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
 
-require("./auth")(app);
+mongoose.connect('mongodb+srv://sangsite:SSkenshin13@sangsite.v6gs5rj.mongodb.net/?retryWrites=true&w=majority', {
+})
+
+// mongoose.connect(process.env.CONNECTION_URI,
+//     { useNewUrlParser: true, useUnifiedTopology: true });
 
 // GET requests
 
@@ -43,14 +42,14 @@ app.get("/", (req, res) => {
 /**
  * Get all countertops
  * @method GET
- * @param {string} endpoint - endpoint to fetch movies. "url/countertops"
- * @returns {object} - returns the movie object
+ * @param {string} endpoint - endpoint to fetch countertops. "url/countertops"
+ * @returns {object} - returns the countertop object
  */
 
 app.get(
     "/countertops",
     (req, res) => {
-        Movies.find()
+        Countertops.find()
             .then(countertops => {
                 res.status(201).json(countertops);
             })
@@ -62,18 +61,18 @@ app.get(
 );
 
 /**
- * Get countertops by material
+ * Get movies by material
  * @method GET
- * @param {string} endpoint - endpoint - fetch countertops by material
- * @param {string} Title - is used to get specific countertop "url/countertops/:Material"
- * @returns {object} - returns the countertop with specific material
+ * @param {string} endpoint - endpoint - fetch countertops by maeterial
+ * @param {string} Material - is used to get specific movie "url/countertops/:Material"
+ * @returns {object} - returns the countertops with specific material
  */
 
 app.get(
     "/countertops/:Material",
     (req, res) => {
-        Movies.findOne({ Material: req.params.Material })
-            .then(countertop => {
+        Countertops.findOne({ Material: req.params.Material })
+            .then(countertops => {
                 res.json(countertop);
             })
             .catch(err => {

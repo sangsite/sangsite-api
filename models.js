@@ -6,7 +6,7 @@ let countertopSchema = mongoose.Schema({
     Color: { type: String, required: true },
     Material: { type: String, required: true },
     Description: { type: String, required: true },
-    ImagePath: String
+    Image: String
 });
 
 let Countertop = mongoose.model("Countertop", countertopSchema);
