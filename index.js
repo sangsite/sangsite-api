@@ -2,14 +2,12 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const cors = require('cors');
 
 const { check, validationResult } = require("express-validator");
 
 const Models = require("./models.js");
 const Countertops = Models.Countertop;
 
-app.use(cors());
 const app = express();
 
 app.use(morgan("common"));
@@ -21,6 +19,8 @@ app.use((err, req, res, next) => {
     res.status(500).send("Something broke!");
 });
 
+const cors = require('cors');
+app.use(cors());
 
 mongoose.connect('mongodb+srv://sangsite:SSkenshin13@sangsite.v6gs5rj.mongodb.net/?retryWrites=true&w=majority', {
 })
