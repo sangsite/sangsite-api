@@ -2,12 +2,14 @@ const express = require("express");
 const morgan = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const cors = require('cors');
 
 const { check, validationResult } = require("express-validator");
 
 const Models = require("./models.js");
 const Countertops = Models.Countertop;
 
+app.use(cors());
 const app = express();
 
 app.use(morgan("common"));
